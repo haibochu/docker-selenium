@@ -21,7 +21,8 @@ RUN apt-get update -qqy \
   && rm /tmp/firefox.tar.bz2 \
   && mv /opt/firefox /opt/firefox-$FIREFOX_VERSION \
   && ln -fs /opt/firefox-$FIREFOX_VERSION/firefox /usr/bin/firefox
-
+RUN apt-get update &&\
+    apt-get install fonts-wqy-zenhei
 #============
 # GeckoDriver
 #============
@@ -41,4 +42,6 @@ COPY generate_config /opt/bin/generate_config
 # Running this command as sudo just to avoid the message:
 # To run a command as administrator (user "root"), use "sudo <command>". See "man sudo_root" for details.
 # When logging into the container
+
+ENV LANG C.UTF-8
 RUN sudo echo ""

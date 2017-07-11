@@ -25,6 +25,8 @@ RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key
     ${CHROME_VERSION:-google-chrome-stable} \
   && rm /etc/apt/sources.list.d/google-chrome.list \
   && rm -rf /var/lib/apt/lists/* /var/cache/apt/*
+RUN apt-get update &&\
+    apt-get install fonts-wqy-zenhei
 
 USER seluser
 
@@ -46,3 +48,4 @@ COPY generate_config /opt/bin/generate_config
 # Chrome Launch Script Modification
 #=================================
 COPY chrome_launcher.sh /opt/google/chrome/google-chrome
+ENV LANG C.UTF-8
